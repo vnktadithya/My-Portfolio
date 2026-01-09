@@ -12,9 +12,6 @@
 🔗 **Live Portfolio:**  
 👉 https://my-portfolio-pink-gamma-52.vercel.app/
 
-📄 **Resume:**  
-👉 [View Resume](./public/Resume.pdf)
-
 </div>
 
 ---
