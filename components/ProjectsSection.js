@@ -1,9 +1,27 @@
 "use client";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 export default function ProjectsSection() {
   const projects = [
+    {
+      title: "SAM: Self Adaptive Music Intelligence",
+      description:
+        "I conceptualized and developed this first-of-its-kind platform-agnostic, voice-controlled 3D music assistant. Powered by Groq Llama 3 for near-instant natural language understanding, it features an immersive 3D interface built with Three.js that reacts to music and voice in real-time. Designed with a highly extensible architecture, it seamlessly integrates new music platforms alongside Spotify and SoundCloud. It offers low-latency interactions, smart audio ducking, and background library synchronization via Celery workers.",
+      image: "/images/sam_3d.png",
+      github: "https://github.com/vnktadithya/Platform-Agnostic-Voice-First-Music-Assistant",
+      demo: "https://sam-self-adaptive-music-intelligenc.vercel.app/",
+      tech: ["Python", "FastAPI", "React", "Three.js", "TypeScript", "Zustand", "Framer Motion", "Groq Llama 3", "Groq STT & TTS", "Redis", "PostgreSQL", "Celery", "WebSockets", "Supabase"],
+    },
+    {
+      title: "NutriScan AI",
+      description:
+        "An intelligent calorie tracking application leveraging Large Multimodal Models (LMMs) to analyze food images. It automatically identifies food, estimates portions, and calculates nutritional values (calories, macros). Features include a visually stunning dashboard with interactive charts, secure Firebase authentication, and cloud sync for tracking daily intake.",
+      image: "/images/nutriscan_ai.png",
+      github: "https://github.com/vnktadithya/NutriScan",
+      tech: ["React", "TypeScript", "Vite", "Zustand", "Recharts", "Framer Motion", "FastAPI", "Python", "Google Gemini API", "Firebase"],
+    },
     {
       title: "Career GPS",
       description:
@@ -30,6 +48,9 @@ export default function ProjectsSection() {
     },
   ];
 
+  const [showAll, setShowAll] = useState(false);
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
+
   return (
     <section className="w-full py-24 text-white relative overflow-hidden">
       {/* ===== Header with line ===== */}
@@ -52,7 +73,7 @@ export default function ProjectsSection() {
 
       {/* ===== Projects ===== */}
       <div className="space-y-16 overflow-hidden">
-        {projects.map((project, index) => {
+        {displayedProjects.map((project, index) => {
           const isEven = index % 2 === 1;
 
           const textMotion = {
@@ -67,9 +88,8 @@ export default function ProjectsSection() {
           return (
             <motion.div
               key={index}
-              className={`flex flex-col md:flex-row items-center justify-between gap-12 ${
-                isEven ? "md:flex-row-reverse" : ""
-              }`}
+              className={`flex flex-col md:flex-row items-center justify-between gap-12 ${isEven ? "md:flex-row-reverse" : ""
+                }`}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.3 }}
@@ -86,53 +106,53 @@ export default function ProjectsSection() {
                 whileHover={{ scale: 1.02 }}
                 className="w-full md:w-[45%] flex justify-center"
               >
-                <div className="w-full md:w-[45%] flex justify-center">
-                <div
-                  className="perspective-[1000px]"
-                  onMouseMove={(e) => {
-                    const container = e.currentTarget;
-                    const img = container.querySelector("img");
-                    const rect = container.getBoundingClientRect();
+                <div className="w-full flex justify-center">
+                  <div
+                    className="perspective-[1000px] w-full max-w-[550px]"
+                    onMouseMove={(e) => {
+                      const container = e.currentTarget;
+                      const img = container.querySelector("img");
+                      const rect = container.getBoundingClientRect();
 
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
+                      const centerX = rect.width / 2;
+                      const centerY = rect.height / 2;
 
-                    const rotateX = ((y - centerY) / centerY) * -360; // reduced for natural motion
-                    const rotateY = ((x - centerX) / centerX) * 360;
+                      const rotateX = ((y - centerY) / centerY) * -360; // reduced for natural motion
+                      const rotateY = ((x - centerX) / centerX) * 360;
 
-                    img.style.transition = "transform 0.08s ease-out";
-                    img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    const container = e.currentTarget;
-                    const img = container.querySelector("img");
-
-                    // ✅ Smoothly go back to neutral (shortest path, no retracing)
-                    img.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
-                    img.style.transform = "rotateX(0deg) rotateY(0deg)";
-
-                    // Remove transition after it finishes
-                    setTimeout(() => {
-                      img.style.transition = "";
-                    }, 700);
-                  }}
-                >
-                  <img
-                    src={project.image.startsWith("/") ? project.image : `/${project.image}`}
-                    alt={project.title}
-                    className="rounded-lg object-contain max-w-[420px] w-full h-auto"
-                    style={{
-                      imageRendering: "auto",
-                      transformStyle: "preserve-3d",
-                      willChange: "transform",
-                      transition: "transform 0.1s ease-out",
-                      filter: "drop-shadow(0 0 15px rgba(56,189,248,0.4))",
+                      img.style.transition = "transform 0.08s ease-out";
+                      img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                     }}
-                  />
+                    onMouseLeave={(e) => {
+                      const container = e.currentTarget;
+                      const img = container.querySelector("img");
+
+                      // ✅ Smoothly go back to neutral (shortest path, no retracing)
+                      img.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+                      img.style.transform = "rotateX(0deg) rotateY(0deg)";
+
+                      // Remove transition after it finishes
+                      setTimeout(() => {
+                        img.style.transition = "";
+                      }, 700);
+                    }}
+                  >
+                    <img
+                      src={project.image.startsWith("/") ? project.image : `/${project.image}`}
+                      alt={project.title}
+                      className="rounded-lg object-contain w-full h-auto"
+                      style={{
+                        imageRendering: "auto",
+                        transformStyle: "preserve-3d",
+                        willChange: "transform",
+                        transition: "transform 0.1s ease-out",
+                        filter: "drop-shadow(0 0 15px rgba(56,189,248,0.4))",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
               </motion.div>
 
 
@@ -165,26 +185,71 @@ export default function ProjectsSection() {
                   ))}
                 </div>
 
-                {/* GitHub Button */}
-                <div className="pt-4">
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    className="inline-flex items-center px-5 py-2 rounded-xl 
-                               bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium 
-                               shadow-md hover:shadow-lg transition-all"
-                  >
-                    <FaGithub className="mr-2" />
-                    View on GitHub
-                  </motion.a>
+                {/* Action Buttons */}
+                <div className="pt-6 pb-6 flex flex-wrap gap-4 justify-center md:justify-start px-3 md:pl-4">
+                  {project.github && (
+                    <motion.a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      className="inline-flex items-center px-5 py-2 rounded-xl 
+                                 bg-cyan-500/10 border border-cyan-500 text-cyan-400 font-medium 
+                                 shadow-md hover:bg-cyan-500 hover:text-white hover:shadow-cyan-500/25 transition-all duration-300"
+                    >
+                      <FaGithub className="mr-2 text-lg" />
+                      View Source
+                    </motion.a>
+                  )}
+
+                  {project.demo && (
+                    <motion.a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      className="inline-flex items-center px-5 py-2 rounded-xl 
+                                 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium 
+                                 shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-300"
+                    >
+                      <FaExternalLinkAlt className="mr-2" />
+                      Live Demo
+                    </motion.a>
+                  )}
                 </div>
               </motion.div>
             </motion.div>
           );
         })}
       </div>
+
+      {/* ===== View All Toggle Button ===== */}
+      {projects.length > 3 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-20"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-transparent border-2 border-cyan-500 rounded-full hover:bg-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-[#0B1120]"
+          >
+            <span className="mr-2">
+              {showAll ? "View Less" : "View All"}
+            </span>
+            <motion.div
+              animate={{ rotate: showAll ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaChevronDown />
+            </motion.div>
+
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 h-full w-full rounded-full group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-shadow duration-300 -z-10"></div>
+          </button>
+        </motion.div>
+      )}
     </section>
   );
 }
