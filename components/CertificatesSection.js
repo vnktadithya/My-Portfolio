@@ -5,6 +5,13 @@ import Image from "next/image";
 export default function CertificatesSection() {
   const certificates = [
     {
+      title: "Introduction to Model Context Protocol",
+      platform: "Anthropic",
+      image:
+        "/certificates/Intro_to_MCP.jpg",
+      link: "http://verify.skilljar.com/c/58njsgd7x93f",
+    },
+    {
       title: "Mathematics – Basics to Advanced for Data Science & GenAI",
       platform: "Udemy",
       image:
@@ -43,13 +50,13 @@ export default function CertificatesSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
         {certificates.map((cert, idx) => (
           <motion.div
-  key={idx}
-  initial={{ opacity: 0, scale: 0.9, y: 40 }}
-  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-  transition={{ duration: 0.7, delay: idx * 0.15, ease: "easeOut" }}
-  viewport={{ once: false, amount: 0.25 }}
-  className="relative group [perspective:1200px]"
->
+            key={idx}
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: idx * 0.15, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.25 }}
+            className="relative group [perspective:1200px]"
+          >
 
             {/* flippable card container */}
             <div
