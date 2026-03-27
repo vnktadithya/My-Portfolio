@@ -11,7 +11,7 @@ export default function ProjectsSection() {
         "I conceptualized and developed this first-of-its-kind platform-agnostic, voice-controlled 3D music assistant. Powered by Groq Llama 3 for near-instant natural language understanding, it features an immersive 3D interface built with Three.js that reacts to music and voice in real-time. Designed with a highly extensible architecture, it seamlessly integrates new music platforms alongside Spotify and SoundCloud. It offers low-latency interactions, smart audio ducking, and background library synchronization via Celery workers.",
       image: "/images/sam_3d.png",
       github: "https://github.com/vnktadithya/Platform-Agnostic-Voice-First-Music-Assistant",
-      demo: "https://sam-self-adaptive-music-intelligenc.vercel.app/",
+      demo: "https://zealous-tree-09e892300.6.azurestaticapps.net/",
       tech: ["Python", "FastAPI", "React", "Three.js", "TypeScript", "Zustand", "Framer Motion", "Groq Llama 3", "Groq STT & TTS", "Redis", "PostgreSQL", "Celery", "WebSockets", "Supabase"],
     },
     {
